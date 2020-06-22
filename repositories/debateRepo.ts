@@ -19,7 +19,7 @@ class DebateRepo {
   }
 
   async find(id: number) {
-    return client.query(`SELECT * FROM argument WHERE id=$1`, id);
+    return client.query(`SELECT * FROM debate WHERE id=$1`, id);
   }
 
   async update(id: number, debate: Debate) {
