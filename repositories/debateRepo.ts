@@ -4,8 +4,7 @@ import Debate from "../model/debateModel.ts";
 class DebateRepo {
   async create(debate: Debate) {
     return client.query(
-      "INSERT INTO debate (id, title, description, generalNotes, infoid, accountid) VALUES ($1, $2, $3, $4, $5, $6)",
-      debate.id,
+      "INSERT INTO debate (title, description, generalNotes, infoid, accountid) VALUES ($1, $2, $3, $4, $5)",
       debate.title,
       debate.description,
       debate.generalNotes,
