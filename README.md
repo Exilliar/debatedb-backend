@@ -2,6 +2,10 @@
 
 backend for debatedb
 
+## Running
+
+`deno run --allow-env --allow-net --allow-read index.ts`
+
 ## Endpoints
 
 ### Account

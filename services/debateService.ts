@@ -7,7 +7,7 @@ class debateService {
     const debates = new Array<Debate>();
 
     result.rows.map((debate) => {
-      var temp: any = {};
+      let temp: any = {};
       result.rowDescription.columns.map((item, index) => {
         temp[item.name] = debate[index];
       });
@@ -20,7 +20,7 @@ class debateService {
   getdebateById = async (id: number) => {
     const result = await debateRepository.find(id);
 
-    var debate: any = {};
+    let debate: any = {};
     result.rows.map((items) => {
       result.rowDescription.columns.map((item, index) => {
         debate[item.name] = items[index];
