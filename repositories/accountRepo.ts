@@ -4,7 +4,7 @@ import Account from "../model/accountModel.ts";
 class AccountRepo {
   async create(account: Account) {
     return client.query(
-      "INSERT INTO account (email, name) VALUES ($$1, $2)",
+      "INSERT INTO account (email, name) VALUES ($1, $2)",
       account.email,
       account.name,
     );
