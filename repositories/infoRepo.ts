@@ -17,7 +17,7 @@ class InfoRepo {
   }
 
   async find(id: number) {
-    return client.query(`SELECT * FROM argument WHERE id=$1`, id);
+    return client.query(`SELECT * FROM info WHERE id=$1`, id);
   }
 
   async update(id: number, info: Info) {

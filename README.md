@@ -11,7 +11,7 @@ backend for debatedb
 ### Account
 
 GET /account // get all accounts
-GET /account/:id // get single account
+GET /account/:id // get single account. Here the id can either be the id of the account, or the email of the account
 POST /account // add account
 PUT /account/:id // update account
 DELETE /account/:id // delete account
