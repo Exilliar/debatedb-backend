@@ -7,7 +7,7 @@ class argumentService {
     const allArguments = new Array<Argument>();
 
     result.rows.map((argument) => {
-      var temp: any = {};
+      let temp: any = {};
       result.rowDescription.columns.map((item, index) => {
         temp[item.name] = argument[index];
       });
@@ -20,7 +20,7 @@ class argumentService {
   getargumentById = async (id: number) => {
     const result = await argumentRepository.find(id);
 
-    var argument: any = {};
+    let argument: any = {};
     result.rows.map((items) => {
       result.rowDescription.columns.map((item, index) => {
         argument[item.name] = items[index];
