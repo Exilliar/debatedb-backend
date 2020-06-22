@@ -53,7 +53,7 @@ DELETE /argument/:argumentId/source/:id // delete source
 ### Quote
 
 GET /source/:sourceId/quote // get all quotes
-GET /source/:sourceId/quote/:id // get single quote
+GET /source/quote/:id // get single quote
 POST /source/:sourceId/quote // add quote
-PUT /source/:sourceId/quote/:id // update quote
+PUT /source/quote/:id // update quote
 DELETE /source/:sourceId/quote/:id // delete quote
