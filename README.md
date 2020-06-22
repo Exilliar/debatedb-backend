@@ -34,7 +34,7 @@ DELETE /argument/:id // delete argument
 
 ### Info
 
-GET /info/:id // get all infos
+GET /info/ // get all infos
 GET /info/:id // get single info
 POST /info // add info
 PUT /info/:id // update info
@@ -42,16 +42,18 @@ DELETE /info/:id // delete info
 
 ### Source
 
-GET /argument/:id/source // get all sources
-GET /argument/:id/source/:id // get single source
-POST /argument/:id/source // add source
-PUT /argument/:id/source/:id // update source
-DELETE /argument/:id/source/:id // delete source
+There is no method to get all sources, regardless of the argument as it is not currently needed.
+
+GET /argument/:argumentId/source // get all sources within an argument
+GET /argument/source/:id // get single source
+POST /argument/:argumentId/source // add source
+PUT /argument/source/:id // update source
+DELETE /argument/:argumentId/source/:id // delete source
 
 ### Quote
 
-GET /source/:id/quote // get all quotes
-GET /source/:id/quote/:id // get single quote
-POST /source/:id/quote // add quote
-PUT /source/:id/quote/:id // update quote
-DELETE /source/:id/quote/:id // delete quote
+GET /source/:sourceId/quote // get all quotes
+GET /source/:sourceId/quote/:id // get single quote
+POST /source/:sourceId/quote // add quote
+PUT /source/:sourceId/quote/:id // update quote
+DELETE /source/:sourceId/quote/:id // delete quote

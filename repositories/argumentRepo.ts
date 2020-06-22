@@ -4,8 +4,7 @@ import Argument from "../model/argumentModel.ts";
 class ArgumentRepo {
   async create(argument: Argument) {
     return client.query(
-      "INSERT INTO argument (id, title, description, generalNotes, infoid, debateid) VALUES ($1, $2, $3, $4, $5, $6)",
-      argument.id,
+      "INSERT INTO argument (title, description, generalNotes, infoid, debateid) VALUES ($1, $2, $3, $4, $5)",
       argument.title,
       argument.description,
       argument.generalNotes,

@@ -4,6 +4,7 @@ import debateController from "./controllers/debateController.ts";
 import argumentController from "./controllers/argumentController.ts";
 import infoController from "./controllers/infoController.ts";
 import accountController from "./controllers/accountController.ts";
+import sourceController from "./controllers/sourceController.ts";
 
 const router = new Router();
 
@@ -38,5 +39,13 @@ router
   .post("/account", accountController.store)
   .put("/account/:id", accountController.update)
   .delete("/account/:id", accountController.delete);
+
+// Source
+router
+  .get("/argument/:argumentId/source", sourceController.index)
+  .get("/argument/source/:id", sourceController.show)
+  .post("/argument/:argumentId/source", sourceController.store)
+  .put("/argument/source/:id", sourceController.update)
+  .delete("/argument/:argumentId/source/:id", sourceController.delete);
 
 export default router;

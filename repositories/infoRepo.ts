@@ -4,8 +4,7 @@ import Info from "../model/infoModel.ts";
 class InfoRepo {
   async create(info: Info) {
     return client.query(
-      "INSERT INTO info (id, description, current, counter) VALUES ($1, $2, $3, $4)",
-      info.id,
+      "INSERT INTO info (description, current, counter) VALUES ($1, $2, $3)",
       info.description,
       info.current,
       info.counter,
