@@ -25,11 +25,11 @@ DELETE /account/:id // delete account
 ### Debate
 
 ```
-GET /debate // get all debates
-GET /debate/:id // get single debate
-POST /debate // add debates
-PUT /debate/:id // update debate
-DELETE /debate/:id // delete debate
+GET account/:accountid/debate // get all debates
+GET account/debate/:id // get single debate
+POST account/debate // add debates
+PUT account/debate/:id // update debate
+DELETE account/debate/:id // delete debate
 ```
 
 ### Argument
