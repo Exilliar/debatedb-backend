@@ -11,11 +11,11 @@ const router = new Router();
 
 // Debate
 router
-  .get("/debate", debateController.index)
-  .get("/debate/:id", debateController.show)
-  .post("/debate", debateController.store)
-  .put("/debate/:id", debateController.update)
-  .delete("/debate/:id", debateController.delete);
+  .get("/account/:accountid/debate", debateController.index)
+  .get("/account/debate/:id", debateController.show)
+  .post("/account/debate", debateController.store)
+  .put("/account/debate/:id", debateController.update)
+  .delete("/account/debate/:id", debateController.delete);
 
 // Argument
 router

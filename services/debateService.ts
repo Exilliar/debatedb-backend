@@ -2,8 +2,8 @@ import debateRepository from "../repositories/debateRepo.ts";
 import Debate from "../model/debateModel.ts";
 
 class debateService {
-  getAllDebates = async () => {
-    const result = await debateRepository.all();
+  getAllDebates = async (accountid: number) => {
+    const result = await debateRepository.all(accountid);
     const debates = new Array<Debate>();
 
     result.rows.map((debate) => {

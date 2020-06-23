@@ -13,8 +13,11 @@ class DebateRepo {
     );
   }
 
-  async all() {
-    return client.query("SELECT * FROM debate ORDER BY id");
+  async all(accountid: number) {
+    return client.query(
+      "SELECT * FROM debate WHERE accountid=$1 ORDER BY id",
+      accountid,
+    );
   }
 
   async find(id: number) {

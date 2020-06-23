@@ -3,7 +3,9 @@ import debateService from "../services/debateService.ts";
 
 class DebateController {
   async index(context: RouterContext) {
-    const debates = await debateService.getAllDebates();
+    const { accountid } = context.params;
+
+    const debates = await debateService.getAllDebates(parseInt(accountid!));
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { data: debates };
