@@ -19,7 +19,7 @@ class QuoteRepo {
       quoteId,
     );
 
-    return query;
+    return quoteId;
   }
 
   async all(sourceid: number) {

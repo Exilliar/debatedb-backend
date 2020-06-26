@@ -3,11 +3,16 @@ import Account from "../model/accountModel.ts";
 
 class AccountRepo {
   async create(account: Account) {
-    return client.query(
+    await client.query(
       "INSERT INTO account (email, name) VALUES ($1, $2)",
       account.email,
       account.name,
     );
+
+    const idQuery = await client.query("SELECT currval('account_seq')");
+    const accountId = idQuery.rows[0][0];
+
+    return accountId;
   }
 
   async all() {

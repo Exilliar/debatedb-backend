@@ -26,10 +26,13 @@ class SourceController {
     );
     const source = result.value;
 
-    await sourceService.createsource(source, parseInt(argumentId!));
+    const newid = await sourceService.createsource(
+      source,
+      parseInt(argumentId!),
+    );
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {

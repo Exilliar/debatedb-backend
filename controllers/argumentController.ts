@@ -22,10 +22,10 @@ class ArgumentController {
     );
     const argument = result.value;
 
-    await argumentService.createargument(argument);
+    const newid = await argumentService.createargument(argument);
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {

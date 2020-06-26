@@ -28,10 +28,10 @@ class AccountController {
     );
     const account = result.value;
 
-    await accountService.createaccount(account);
+    const newid = await accountService.createaccount(account);
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {
