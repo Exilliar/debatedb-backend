@@ -8,8 +8,8 @@ class DebateRepo {
       debate.title,
       debate.description,
       debate.generalNotes,
-      debate.infoId,
-      debate.accountId,
+      debate.infoid,
+      debate.accountid,
     );
   }
 
@@ -31,8 +31,8 @@ class DebateRepo {
       debate.title,
       debate.description,
       debate.generalNotes,
-      debate.infoId,
-      debate.accountId,
+      debate.infoid,
+      debate.accountid,
     );
   }
 
