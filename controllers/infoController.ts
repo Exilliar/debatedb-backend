@@ -22,10 +22,10 @@ class InfoController {
     );
     const info = result.value;
 
-    await infoService.createinfo(info);
+    const newid = await infoService.createinfo(info);
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {

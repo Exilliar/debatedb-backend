@@ -24,10 +24,10 @@ class DebateController {
     );
     const debate = result.value;
 
-    await debateService.createdebate(debate);
+    const newid = await debateService.createdebate(debate);
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {

@@ -3,12 +3,17 @@ import Info from "../model/infoModel.ts";
 
 class InfoRepo {
   async create(info: Info) {
-    return client.query(
+    await client.query(
       "INSERT INTO info (description, current, counter) VALUES ($1, $2, $3)",
       info.description,
       info.current,
       info.counter,
     );
+
+    const idQuery = await client.query("SELECT currval('info_seq')");
+    const quoteId = idQuery.rows[0][0];
+
+    return quoteId;
   }
 
   async all() {

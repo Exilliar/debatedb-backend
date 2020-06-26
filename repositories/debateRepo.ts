@@ -3,7 +3,7 @@ import Debate from "../model/debateModel.ts";
 
 class DebateRepo {
   async create(debate: Debate) {
-    return client.query(
+    await client.query(
       "INSERT INTO debate (title, description, generalNotes, infoid, accountid) VALUES ($1, $2, $3, $4, $5)",
       debate.title,
       debate.description,
@@ -11,6 +11,11 @@ class DebateRepo {
       debate.infoid,
       debate.accountid,
     );
+
+    const idQuery = await client.query("SELECT currval('debate_seq')");
+    const debateId = idQuery.rows[0][0];
+
+    return debateId;
   }
 
   async all(accountid: number) {

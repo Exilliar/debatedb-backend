@@ -3,7 +3,7 @@ import Argument from "../model/argumentModel.ts";
 
 class ArgumentRepo {
   async create(argument: Argument) {
-    return client.query(
+    await client.query(
       "INSERT INTO argument (title, description, generalNotes, infoid, debateid) VALUES ($1, $2, $3, $4, $5)",
       argument.title,
       argument.description,
@@ -11,6 +11,11 @@ class ArgumentRepo {
       argument.infoid,
       argument.debateId,
     );
+
+    const idQuery = await client.query("SELECT currval('argument_seq')");
+    const argumentId = idQuery.rows[0][0];
+
+    return argumentId;
   }
 
   async all() {

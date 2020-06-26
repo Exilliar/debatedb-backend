@@ -26,10 +26,10 @@ class QuoteController {
     );
     const quote = result.value;
 
-    await quoteService.createquote(quote, parseInt(sourceId!));
+    const newid = await quoteService.createquote(quote, parseInt(sourceId!));
 
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { message: "success" };
+    context.response.body = { message: "success", newid: newid };
   }
 
   async update(context: RouterContext) {

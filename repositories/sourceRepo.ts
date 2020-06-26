@@ -20,7 +20,7 @@ class SourceRepo {
       sourceId,
     );
 
-    return query;
+    return sourceId;
   }
 
   async all(argumentid: number) {
