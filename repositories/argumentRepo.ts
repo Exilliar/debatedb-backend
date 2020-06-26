@@ -8,7 +8,7 @@ class ArgumentRepo {
       argument.title,
       argument.description,
       argument.generalNotes,
-      argument.infoId,
+      argument.infoid,
       argument.debateId,
     );
   }
@@ -28,7 +28,7 @@ class ArgumentRepo {
       argument.title,
       argument.description,
       argument.generalNotes,
-      argument.infoId,
+      argument.infoid,
       argument.debateId,
     );
   }
