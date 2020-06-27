@@ -18,8 +18,11 @@ class ArgumentRepo {
     return argumentId;
   }
 
-  async all() {
-    return client.query("SELECT * FROM argument ORDER BY id");
+  async all(debateId: number) {
+    return client.query(
+      "SELECT * FROM argument WHERE debateid=$1 ORDER BY id",
+      debateId,
+    );
   }
 
   async find(id: number) {

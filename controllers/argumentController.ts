@@ -3,7 +3,11 @@ import argumentService from "../services/argumentService.ts";
 
 class ArgumentController {
   async index(context: RouterContext) {
-    const allArguments = await argumentService.getAllArguments();
+    const { debateId } = context.params;
+
+    const allArguments = await argumentService.getAllArguments(
+      parseInt(debateId!),
+    );
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { data: allArguments };
@@ -11,7 +15,9 @@ class ArgumentController {
 
   async show(context: RouterContext) {
     const { id } = context.params;
+
     const argument = await argumentService.getargumentById(parseInt(id!));
+
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { data: argument };
   }
