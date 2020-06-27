@@ -9,6 +9,14 @@ import quoteController from "./controllers/quoteController.ts";
 
 const router = new Router();
 
+// Account
+router
+  .get("/account", accountController.index)
+  .get("/account/:id", accountController.show)
+  .post("/account", accountController.store)
+  .put("/account/:id", accountController.update)
+  .delete("/account/:id", accountController.delete);
+
 // Debate
 router
   .get("/account/:accountid/debate", debateController.index)
@@ -19,11 +27,11 @@ router
 
 // Argument
 router
-  .get("/argument", argumentController.index)
-  .get("/argument/:id", argumentController.show)
-  .post("/argument", argumentController.store)
-  .put("/argument/:id", argumentController.update)
-  .delete("/argument/:id", argumentController.delete);
+  .get("/debate/:debateId/argument", argumentController.index)
+  .get("/debate/argument/:id", argumentController.show)
+  .post("/debate/argument", argumentController.store)
+  .put("/debate/argument/:id", argumentController.update)
+  .delete("/debate/argument/:id", argumentController.delete);
 
 // Info
 router
@@ -32,14 +40,6 @@ router
   .post("/info", infoController.store)
   .put("/info/:id", infoController.update)
   .delete("/info/:id", infoController.delete);
-
-// Account
-router
-  .get("/account", accountController.index)
-  .get("/account/:id", accountController.show)
-  .post("/account", accountController.store)
-  .put("/account/:id", accountController.update)
-  .delete("/account/:id", accountController.delete);
 
 // Source
 router

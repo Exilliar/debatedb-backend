@@ -2,8 +2,8 @@ import argumentRepository from "../repositories/argumentRepo.ts";
 import Argument from "../model/argumentModel.ts";
 
 class argumentService {
-  getAllArguments = async () => {
-    const result = await argumentRepository.all();
+  getAllArguments = async (debateId: number) => {
+    const result = await argumentRepository.all(debateId);
     const allArguments = new Array<Argument>();
 
     result.rows.map((argument) => {
