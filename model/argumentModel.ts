@@ -3,5 +3,5 @@ export default interface Argument {
   description: string;
   generalnotes: string;
   infoid: number;
-  debateId: number;
+  debateid: number;
 }

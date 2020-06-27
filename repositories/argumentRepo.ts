@@ -9,7 +9,7 @@ class ArgumentRepo {
       argument.description,
       argument.generalnotes,
       argument.infoid,
-      argument.debateId,
+      argument.debateid,
     );
 
     const idQuery = await client.query("SELECT currval('argument_seq')");
@@ -37,7 +37,7 @@ class ArgumentRepo {
       argument.description,
       argument.generalnotes,
       argument.infoid,
-      argument.debateId,
+      argument.debateid,
     );
   }
 
