@@ -47,7 +47,7 @@ router
   .get("/argument/source/:id", sourceController.show)
   .post("/argument/:argumentId/source", sourceController.store)
   .put("/argument/source/:id", sourceController.update)
-  .delete("/argument/:argumentId/source/:id", sourceController.delete);
+  .delete("/argument/source/:id", sourceController.delete);
 
 // Quote
 router
@@ -55,6 +55,6 @@ router
   .get("/source/quote/:id", quoteController.show)
   .post("/source/:sourceId/quote", quoteController.store)
   .put("/source/quote/:id", quoteController.update)
-  .delete("/source/:sourceId/quote/:id", quoteController.delete);
+  .delete("/source/quote/:id", quoteController.delete);
 
 export default router;

@@ -40,8 +40,8 @@ class quoteService {
     return await quoteRepository.update(id, quote);
   };
 
-  deletequote = async (id: number, sourceid: number) => {
-    return await quoteRepository.delete(id, sourceid);
+  deletequote = async (id: number) => {
+    return await quoteRepository.delete(id);
   };
 }
 
