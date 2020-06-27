@@ -4,10 +4,10 @@ import Argument from "../model/argumentModel.ts";
 class ArgumentRepo {
   async create(argument: Argument) {
     await client.query(
-      "INSERT INTO argument (title, description, generalNotes, infoid, debateid) VALUES ($1, $2, $3, $4, $5)",
+      "INSERT INTO argument (title, description, generalnotes, infoid, debateid) VALUES ($1, $2, $3, $4, $5)",
       argument.title,
       argument.description,
-      argument.generalNotes,
+      argument.generalnotes,
       argument.infoid,
       argument.debateId,
     );
@@ -28,11 +28,11 @@ class ArgumentRepo {
 
   async update(id: number, argument: Argument) {
     return client.query(
-      "UPDATE argument SET title=$2, description=$3, generalNotes=$4, infoid=$5, debateid=$6 WHERE id=$1",
+      "UPDATE argument SET title=$2, description=$3, generalnotes=$4, infoid=$5, debateid=$6 WHERE id=$1",
       id,
       argument.title,
       argument.description,
-      argument.generalNotes,
+      argument.generalnotes,
       argument.infoid,
       argument.debateId,
     );
