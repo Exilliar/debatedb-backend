@@ -48,8 +48,8 @@ class SourceController {
   }
 
   async delete(context: RouterContext) {
-    const { id, argumentId } = context.params;
-    await sourceService.deletesource(parseInt(id!), parseInt(argumentId!));
+    const { id } = context.params;
+    await sourceService.deletesource(parseInt(id!));
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { message: "success" };

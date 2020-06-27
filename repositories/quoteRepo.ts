@@ -4,27 +4,22 @@ import Quote from "../model/quoteModel.ts";
 class QuoteRepo {
   async create(quote: Quote, sourceid: number) {
     const query = await client.query(
-      "INSERT INTO quote (text, additional) VALUES ($1, $2)",
+      "INSERT INTO quote (text, additional, sourceid) VALUES ($1, $2, $3)",
       quote.text,
       quote.additional,
+      sourceid,
     );
 
     // Get the id of the quote that was just added
     const idQuery = await client.query("SELECT currval('quote_seq')");
     const quoteId = idQuery.rows[0][0];
 
-    await client.query(
-      "INSERT INTO quotes (sourceid, quoteid) VALUES ($1, $2)",
-      sourceid,
-      quoteId,
-    );
-
     return quoteId;
   }
 
   async all(sourceid: number) {
     return client.query(
-      "SELECT DISTINCT quote.id, quote.text, quote.additional FROM quote, quotes WHERE quotes.sourceid=$1 AND quotes.quoteid=quote.id ORDER BY quote.id",
+      "SELECT* FROM quote WHERE sourceid=$1 ORDER BY id",
       sourceid,
     );
   }
@@ -42,13 +37,7 @@ class QuoteRepo {
     );
   }
 
-  async delete(id: number, sourceid: number) {
-    await client.query(
-      "DELETE FROM quotes WHERE sourceid=$1 AND quoteid=$2",
-      sourceid,
-      id,
-    );
-
+  async delete(id: number) {
     return client.query("DELETE FROM quote WHERE id=$1", id);
   }
 }

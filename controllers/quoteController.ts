@@ -45,8 +45,8 @@ class QuoteController {
   }
 
   async delete(context: RouterContext) {
-    const { id, sourceId } = context.params;
-    await quoteService.deletequote(parseInt(id!), parseInt(sourceId!));
+    const { id } = context.params;
+    await quoteService.deletequote(parseInt(id!));
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { message: "success" };

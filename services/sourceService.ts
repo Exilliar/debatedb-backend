@@ -40,8 +40,8 @@ class sourceService {
     return await sourceRepository.update(id, source);
   };
 
-  deletesource = async (id: number, argumentid: number) => {
-    return await sourceRepository.delete(id, argumentid);
+  deletesource = async (id: number) => {
+    return await sourceRepository.delete(id);
   };
 }
 
