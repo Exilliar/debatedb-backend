@@ -7,9 +7,7 @@ import { client } from "./db/database.ts";
 const app = new Application();
 
 app.use(
-  oakCors({
-    origin: "http://localhost:8080",
-  }),
+  oakCors(),
 );
 
 app.use(router.routes());
