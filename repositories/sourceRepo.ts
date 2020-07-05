@@ -41,6 +41,12 @@ class SourceRepo {
   }
 
   async delete(id: number) {
+    await this.deleteQuotes(id);
+
+    return client.query("DELETE FROM source WHERE id=$1", id);
+  }
+
+  async deleteQuotes(id: number) {
     const quotesQuery = await client.query(
       "SELECT id FROM quote WHERE sourceid=$1",
       id,
@@ -52,7 +58,7 @@ class SourceRepo {
       await quoteRepository.delete(quoteids[i][0]);
     }
 
-    return client.query("DELETE FROM source WHERE id=$1", id);
+    return;
   }
 }
 
