@@ -1,6 +1,9 @@
 import { client } from "../db/database.ts";
 import Argument from "../model/argumentModel.ts";
 
+import infoRepository from "./infoRepo.ts";
+import sourceRepository from "./sourceRepo.ts";
+
 class ArgumentRepo {
   async create(argument: Argument) {
     await client.query(
@@ -42,7 +45,41 @@ class ArgumentRepo {
   }
 
   async delete(id: number) {
-    return client.query("DELETE FROM argument WHERE id=$1", id);
+    const infoid = await this.getInfoid(id);
+
+    await this.deleteSources(id);
+
+    client.query("DELETE FROM argument WHERE id=$1", id);
+
+    infoRepository.delete(infoid);
+
+    return;
+  }
+
+  async getInfoid(id: number) {
+    const infoQuery = await client.query(
+      "SELECT infoid FROM argument WHERE id=$1",
+      id,
+    );
+
+    const infoid: number = infoQuery.rows[0][0];
+
+    return infoid;
+  }
+
+  async deleteSources(id: number) {
+    const sourceQuery = await client.query(
+      "SELECT id FROM source WHERE argumentid=$1",
+      id,
+    );
+
+    const sourceids: number[][] = sourceQuery.rows;
+
+    for (let i = 0; i < sourceids.length; i++) {
+      await sourceRepository.delete(sourceids[i][0]);
+    }
+
+    return;
   }
 }
 
