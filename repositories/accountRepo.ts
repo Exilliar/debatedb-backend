@@ -1,6 +1,8 @@
 import { client } from "../db/database.ts";
 import Account from "../model/accountModel.ts";
 
+import debateRepository from "./debateRepo.ts";
+
 class AccountRepo {
   async create(account: Account) {
     await client.query(
@@ -37,7 +39,25 @@ class AccountRepo {
   }
 
   async delete(id: number) {
-    return client.query("DELETE FROM account WHERE id=$1", id);
+    await this.deleteDebates(id);
+
+    const query = client.query("DELETE FROM account WHERE id=$1", id);
+
+    return;
+  }
+  async deleteDebates(id: number) {
+    const debatesQuery = await client.query(
+      "SELECT id FROM debate WHERE accountid=$1",
+      id,
+    );
+
+    const debateids: number[][] = debatesQuery.rows;
+
+    for (let i = 0; i < debateids.length; i++) {
+      await debateRepository.delete(debateids[i][0]);
+    }
+
+    return;
   }
 }
 
