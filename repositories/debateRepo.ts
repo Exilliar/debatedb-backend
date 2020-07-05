@@ -1,6 +1,9 @@
 import { client } from "../db/database.ts";
 import Debate from "../model/debateModel.ts";
 
+import infoRepository from "./infoRepo.ts";
+import argumentRepository from "./argumentRepo.ts";
+
 class DebateRepo {
   async create(debate: Debate) {
     await client.query(
@@ -42,7 +45,40 @@ class DebateRepo {
   }
 
   async delete(id: number) {
-    return client.query("DELETE FROM debate WHERE id=$1", id);
+    const infoid = await this.getInfoid(id);
+
+    await this.deleteArguments(id);
+
+    client.query("DELETE FROM debate WHERE id=$1", id);
+
+    infoRepository.delete(infoid);
+
+    return;
+  }
+
+  async getInfoid(id: number) {
+    const infoQuery = await client.query(
+      "SELECT infoid FROM debate WHERE id=$1",
+      id,
+    );
+
+    const infoid: number = infoQuery.rows[0][0];
+
+    return infoid;
+  }
+  async deleteArguments(id: number) {
+    const argumentQuery = await client.query(
+      "SELECT id FROM argument WHERE debateid=$1",
+      id,
+    );
+
+    const argumentids: number[][] = argumentQuery.rows;
+
+    for (let i = 0; i < argumentids.length; i++) {
+      await argumentRepository.delete(argumentids[i][0]);
+    }
+
+    return;
   }
 }
 
