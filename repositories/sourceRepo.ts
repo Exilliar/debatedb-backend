@@ -1,5 +1,6 @@
 import { client } from "../db/database.ts";
 import Source from "../model/sourceModel.ts";
+import quoteRepository from "./quoteRepo.ts";
 
 class SourceRepo {
   async create(source: Source, argumentid: number) {
@@ -40,6 +41,17 @@ class SourceRepo {
   }
 
   async delete(id: number) {
+    const quotesQuery = await client.query(
+      "SELECT id FROM quote WHERE sourceid=$1",
+      id,
+    );
+
+    const quoteids: number[][] = quotesQuery.rows;
+
+    for (let i = 0; i < quoteids.length; i++) {
+      await quoteRepository.delete(quoteids[i][0]);
+    }
+
     return client.query("DELETE FROM source WHERE id=$1", id);
   }
 }
