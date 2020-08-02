@@ -4,7 +4,20 @@ backend for debatedb
 
 ## Running
 
-`deno run --allow-env --allow-net --allow-read index.ts`
+`denon start`
+
+The direct `deno run` command can be found in the `denon.json` file.
+
+## Deployment
+
+To deploy the docker image must be built and pushed to docker hub. Once the image is there the server can pull down the image and run it.
+
+The commands to build and push:
+
+```
+docker build -t exilliar/debatedb-backend:latest .
+docker push exilliar/debatedb-backend:latest
+```
 
 ## Received data format
 

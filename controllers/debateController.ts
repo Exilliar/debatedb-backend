@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import debateService from "../services/debateService.ts";
+import Debate from "../model/debateModel.ts";
 
 class DebateController {
   async index(context: RouterContext) {
@@ -19,10 +20,8 @@ class DebateController {
   }
 
   async store(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const debate = result.value;
+    const result = context.request.body({ type: "json" });
+    const debate: Debate = await result.value;
 
     const newid = await debateService.createdebate(debate);
 
@@ -31,10 +30,8 @@ class DebateController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const debate = result.value;
+    const result = context.request.body({ type: "json" });
+    const debate: Debate = await result.value;
     const { id } = context.params;
     await debateService.updatedebate(parseInt(id!), debate);
 

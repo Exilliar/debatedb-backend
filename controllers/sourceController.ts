@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import sourceService from "../services/sourceService.ts";
+import Source from "../model/sourceModel.ts";
 
 class SourceController {
   async index(context: RouterContext) {
@@ -21,10 +22,8 @@ class SourceController {
   async store(context: RouterContext) {
     const { argumentId } = context.params;
 
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const source = result.value;
+    const result = context.request.body({ type: "json" });
+    const source: Source = await result.value;
 
     const newid = await sourceService.createsource(
       source,
@@ -36,10 +35,8 @@ class SourceController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const source = result.value;
+    const result = context.request.body({ type: "json" });
+    const source: Source = await result.value;
     const { id } = context.params;
     await sourceService.updatesource(parseInt(id!), source);
 
