@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import infoService from "../services/infoService.ts";
+import Info from "../model/infoModel.ts";
 
 class InfoController {
   async index(context: RouterContext) {
@@ -17,10 +18,8 @@ class InfoController {
   }
 
   async store(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const info = result.value;
+    const result = context.request.body({ type: "json" });
+    const info: Info = await result.value;
 
     const newid = await infoService.createinfo(info);
 
@@ -29,10 +28,8 @@ class InfoController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const info = result.value;
+    const result = context.request.body({ type: "json" });
+    const info: Info = await result.value;
     const { id } = context.params;
     await infoService.updateinfo(parseInt(id!), info);
 

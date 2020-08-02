@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import argumentService from "../services/argumentService.ts";
+import Argument from "../model/argumentModel.ts";
 
 class ArgumentController {
   async index(context: RouterContext) {
@@ -23,10 +24,8 @@ class ArgumentController {
   }
 
   async store(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const argument = result.value;
+    const result = context.request.body({ type: "json" });
+    const argument: Argument = await result.value;
 
     const newid = await argumentService.createargument(argument);
 
@@ -35,10 +34,8 @@ class ArgumentController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const argument = result.value;
+    const result = context.request.body({ type: "json" });
+    const argument: Argument = await result.value;
     const { id } = context.params;
     await argumentService.updateargument(parseInt(id!), argument);
 

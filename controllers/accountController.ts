@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import accountService from "../services/accountService.ts";
+import Account from "../model/accountModel.ts";
 
 class AccountController {
   async index(context: RouterContext) {
@@ -23,10 +24,8 @@ class AccountController {
   }
 
   async store(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const account = result.value;
+    const result = context.request.body({ type: "json" });
+    const account: Account = await result.value;
 
     const newid = await accountService.createaccount(account);
 
@@ -35,10 +34,8 @@ class AccountController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const account = result.value;
+    const result = context.request.body({ type: "json" });
+    const account: Account = await result.value;
     const { id } = context.params;
     await accountService.updateaccount(parseInt(id!), account);
 

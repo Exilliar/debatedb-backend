@@ -1,5 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import quoteService from "../services/quoteService.ts";
+import Quote from "../model/quoteModel.ts";
 
 class QuoteController {
   async index(context: RouterContext) {
@@ -21,10 +22,8 @@ class QuoteController {
   async store(context: RouterContext) {
     const { sourceId } = context.params;
 
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const quote = result.value;
+    const result = context.request.body({ type: "json" });
+    const quote: Quote = await result.value;
 
     const newid = await quoteService.createquote(quote, parseInt(sourceId!));
 
@@ -33,10 +32,8 @@ class QuoteController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
-    const quote = result.value;
+    const result = context.request.body({ type: "json" });
+    const quote: Quote = await result.value;
     const { id } = context.params;
     await quoteService.updatequote(parseInt(id!), quote);
 

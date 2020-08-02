@@ -2,7 +2,7 @@ version: "3"
 
 services:
   web:
-    build: .
+    image: exilliar/debatedb-backend:latest
     container_name: debatedb-backend
     network_mode: "host"
     ports:
